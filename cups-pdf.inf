@@ -1,0 +1,66 @@
+[Version]
+Signature="$Windows NT$"
+Provider=%CUPS-PDF%
+ClassGUID={4D36E979-E325-11CE-BFC1-08002BE10318}
+Class=Printer
+DriverVer=1.0.0.0
+
+
+;
+; Manufacturer section.
+;
+; This section lists all of the manufacturers 
+; that we will display in the Dialog box
+;
+[Manufacturer]
+%CUPS-PDF%=CUPS-PDF,NTamd64
+
+[OEM URLS]
+%CUPS-PDF%="http://"
+
+;
+; Model sections. 
+; 
+; Each section here corresponds with an entry listed in the
+; [Manufacturer] section, above. The models will be displayed in the order
+; that they appear in the INF file.
+;
+
+[CUPS-PDF.NTamd64]
+"CUPS-PDF PDF printer"  =CUPS-PDF.ppd
+
+;
+; Installer Sections
+;
+; These sections control file installation, and reference all files that
+; need to be copied. The section name will be assumed to be the driver
+; file, unless there is an explicit DriverFile section listed.
+;
+
+[CUPS-PDF.ppd]
+CopyFiles=@CUPS-PDF.ppd
+DataSection=PSCRIPT_DATA
+Include=NTPRINT.INF
+Needs=PSCRIPT_FE.OEM,PSCRIPT_DATA
+;
+; Call SetupSetDirectoryId with 66000 to set the target directory at runtime
+; (depending on which environment drivers are getting installed)
+;
+[DestinationDirs]
+DefaultDestDir=66000
+
+;
+;  Source Disks Section
+;
+[SourceDisksNames.amd64]
+2=%DISK_ID%,,,""
+
+[SourceDisksFiles.amd64]
+CUPS-PDF.ppd = 2
+;
+; Localizable Strings
+;
+[Strings]
+CUPS-PDF="CUPS-PDF"
+DISK_ID="CUPS-PDF PostScript Driver"
+PrinterClassName="Printers"
